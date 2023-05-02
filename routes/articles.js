@@ -14,7 +14,7 @@ router.delete(
   '/:article._id',
   celebrate({
     params: Joi.object().keys({
-      card_id: Joi.string().hex().length(24),
+      article_id: Joi.string().hex().length(24),
     }),
   }),
   deleteArticle,

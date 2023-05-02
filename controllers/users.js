@@ -23,17 +23,17 @@ const getUserById = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, name } = req.body;
   try {
-    if (!email && !password && !username) {
-      return next(new ErrorHandler(400, 'email password and username reqwired'));
+    if (!email && !password && !name) {
+      return next(new ErrorHandler(400, 'email password and name reqwired'));
     }
     const isUserExists = await User.findOne({ email: email });
     if (isUserExists) {
       return next(new ErrorHandler(409, 'email already exists'));
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ email: email, password: hashedPassword, username: username });
+    const user = await User.create({ email: email, password: hashedPassword, name: name });
     if (hashedPassword && user) {
       res.status(201).send({ id: user._id, email: user.email });
     }

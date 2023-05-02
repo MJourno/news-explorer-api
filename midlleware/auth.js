@@ -8,6 +8,7 @@ const { NODE_ENV } = require('../utils/constants');
 module.exports = (req, res, next) => {
   // getting authorization from the header
   const { authorization } = req.headers;
+  console.log(req.headers, 'req.headers');
   // check the header exists and starts with 'Bearer '
   if (!authorization || !authorization.startsWith('Bearer ')) {
     console.log(authorization, 'authorization2');
