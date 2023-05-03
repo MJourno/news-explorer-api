@@ -19,9 +19,9 @@ const app = express();
 const { PORT = 3000 } = process.env;
 
 const allowedOrigins = [
-  // 'https://project15.strangled.net',
-  // 'https://www.project15.strangled.net',
-  // 'https://api.project15.strangled.net',
+  'https://articlear.crabdance.com',
+  'https://www.articlear.crabdance.com',
+  'https://api.articlear.crabdance.com',
   'http://localhost:3000',
 ];
 
