@@ -7,7 +7,7 @@ const { NODE_ENV } = require('../utils/constants');
 const getUserById = async (req, res, next) => {
   console.log(typeof (req.user._id));
   try {
-    const user = await User.findById(req.user._id)
+    const user = await User.findById(req.user._id);
     if (!user) {
       return next(new ErrorHandler(404, 'User ID not found'));
     }
@@ -28,12 +28,12 @@ const createUser = async (req, res, next) => {
     if (!email && !password && !name) {
       return next(new ErrorHandler(400, 'email password and name reqwired'));
     }
-    const isUserExists = await User.findOne({ email: email });
+    const isUserExists = await User.findOne({ email });
     if (isUserExists) {
       return next(new ErrorHandler(409, 'email already exists'));
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ email: email, password: hashedPassword, name: name });
+    const user = await User.create({ email, password: hashedPassword, name });
     if (hashedPassword && user) {
       res.status(201).send({ id: user._id, email: user.email });
     }
@@ -50,18 +50,18 @@ const createUser = async (req, res, next) => {
 const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
-    .then(user => {
+    .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      res.status(200).send({ token: token });
+      res.status(200).send({ token });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Error happened in login', err);
       return next(new ErrorHandler(401, 'Something went wrong'));
     });
 };
 
 module.exports = {
-  getUserById: getUserById,
-  createUser: createUser,
-  login: login,
+  getUserById,
+  createUser,
+  login,
 };

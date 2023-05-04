@@ -18,8 +18,13 @@ module.exports = {
     'react',
   ],
   rules: {
-    "allow": [
-      "_id"
-    ]
+    'no-underscore-dangle': [
+      2,
+      {
+        allow: [
+          '_id',
+        ],
+      },
+    ],
   },
 };

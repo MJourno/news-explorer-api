@@ -28,7 +28,7 @@ const allowedOrigins = [
 mongoose.connect('mongodb://localhost:27017/final-project-db')
   .then(() => {
     console.log('connected to mongoose');
-  }).catch(error => {
+  }).catch((error) => {
     console.log('cant connect', error);
   });
 

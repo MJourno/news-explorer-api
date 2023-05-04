@@ -14,16 +14,18 @@ const returnSavedArticles = async (req, res, next) => {
 
 const createNewArticle = async (req, res, next) => {
   console.log(req.user._id);
-  const { keyword, title, text, date, source, link, image } = req.body;
+  const {
+    keyword, title, text, date, source, link, image,
+  } = req.body;
   try {
     const newArticle = await Article.create({
-      keyword: keyword,
-      title: title,
-      text: text,
-      date: date,
-      source: source,
-      link: link,
-      image: image,
+      keyword,
+      title,
+      text,
+      date,
+      source,
+      link,
+      image,
       owner: req.user._id,
     });
     res.status(201).send(newArticle);
@@ -60,7 +62,7 @@ const deleteArticle = async (req, res, next) => {
 };
 
 module.exports = {
-  returnSavedArticles: returnSavedArticles,
-  createNewArticle: createNewArticle,
-  deleteArticle: deleteArticle,
+  returnSavedArticles,
+  createNewArticle,
+  deleteArticle,
 };
