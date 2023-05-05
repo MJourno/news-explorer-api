@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const reg = /[(http(s)?)://(www.)?a-zA-Z0-9@:%.+~#=]{2,256}.[a-z]{2,6}([-a-zA-Z0-9@:%+.~#?&//=]*)/i;
+
 const articleSchema = new mongoose.Schema({
   keyword: {
     type: String,
@@ -32,9 +34,7 @@ const articleSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
-          v,
-        );
+        return reg.test(v);
       },
     },
   },
@@ -43,9 +43,7 @@ const articleSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
-          v,
-        );
+        return reg.test(v);
       },
     },
   },

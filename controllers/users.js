@@ -15,11 +15,10 @@ const getUserById = async (req, res, next) => {
   } catch (err) {
     console.log('Error happened in getUserById', err);
     if (err.name === 'CastError') {
-      if (err.name === 'DocumentNotFoundError') {
-      }
       return next(new ErrorHandler(500, 'An error has occurred on the server.'));
     }
   }
+  return {};
 };
 
 const createUser = async (req, res, next) => {
