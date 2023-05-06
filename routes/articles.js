@@ -1,23 +1,15 @@
-const express = require('express');
-const { celebrate, Joi } = require('celebrate');
+const router = require('express').Router();
 
-const router = express.Router();
 const {
   returnSavedArticles,
   createNewArticle,
   deleteArticle,
 } = require('../controllers/articles');
 
+const { newArticleValidation, articleIdValidation } = require('../midlleware/validation');
+
 router.get('/', returnSavedArticles);
-router.post('/', createNewArticle);
-router.delete(
-  '/:article._id',
-  celebrate({
-    params: Joi.object().keys({
-      article_id: Joi.string().hex().length(24),
-    }),
-  }),
-  deleteArticle,
-);
+router.post('/', newArticleValidation, createNewArticle);
+router.delete('/:article._id', articleIdValidation, deleteArticle);
 
 module.exports = router;

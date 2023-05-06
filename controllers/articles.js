@@ -3,7 +3,7 @@ const { ErrorHandler } = require('../errors/error');
 
 const returnSavedArticles = async (req, res, next) => {
   try {
-    const articles = await Article.find({});
+    const articles = await Article.find({ owner: req.user._id });
     res.status(200).send(articles);
     return articles;
   } catch (err) {

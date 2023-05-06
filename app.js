@@ -1,17 +1,14 @@
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { errors } = require('celebrate');
-const usersRouter = require('./routes/users');
-const articlesRouter = require('./routes/articles');
-const { createUser, login } = require('./controllers/users');
-const auth = require('./midlleware/auth');
-const { ErrorHandler, customErrorHandler } = require('./errors/error');
+const router = require('./routes');
+const { customErrorHandler } = require('./errors/error');
 const { requestLogger, errorLogger } = require('./midlleware/logger');
 
-require('dotenv').config();
 
 console.log(process.env.NODE_ENV); // production
 
@@ -37,19 +34,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.options(allowedOrigins, cors());
 app.use(requestLogger);
-
-app.post('/signin', login);
-app.post('/signup', createUser);
-
-// authorization
-app.use(auth);
-
-app.use('/users', usersRouter);
-app.use('/articles', articlesRouter);
-
-app.use(() => {
-  throw new ErrorHandler(404, 'The requested resource was not found.');
-});
+app.use(router);
 app.use(errorLogger); // enabling the error logger
 app.use(errors());// celebrate error handler
 
