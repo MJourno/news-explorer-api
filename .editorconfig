@@ -30,5 +30,5 @@ trim_trailing_whitespace = true
 trim_trailing_whitespace = false
 
 # Denotes whether file should end with a newline
-# Possible values - true, false
+# Possible values - true, false.
 insert_final_newline = true
