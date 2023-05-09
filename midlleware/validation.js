@@ -51,4 +51,4 @@ module.exports = {
   signInValidation,
   newArticleValidation,
   articleIdValidation
-}
+};

@@ -34,4 +34,4 @@ module.exports = (req, res, next) => {
   // assigning the payload to the request object
   // sending the request to the next middleware
   return next();
-}
+};
