@@ -12,4 +12,4 @@ router.get('/', returnSavedArticles);
 router.post('/', newArticleValidation, createNewArticle);
 router.delete('/:article._id', articleIdValidation, deleteArticle);
 
-module.exports = router;
+module.exports = router
