@@ -15,8 +15,9 @@ const getUserById = async (req, res, next) => {
   } catch (err) {
     console.log('Error happened in getUserById', err);
     if (err.name === 'CastError') {
-      return next(new ErrorHandler(500, 'An error has occurred on the server.'));
+      return next(new ErrorHandler(400, 'Invalid _id.'));
     }
+    return next(new ErrorHandler(500, 'An error has occurred on the server.'));
   }
   return {};
 };

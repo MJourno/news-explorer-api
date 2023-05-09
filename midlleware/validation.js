@@ -31,11 +31,10 @@ const newArticleValidation = celebrate({
     keyword: Joi.string().required(),
     title: Joi.string().required(),
     text: Joi.string().required(),
-    date: Joi.required().string(),
+    date: Joi.string().required(),
     source: Joi.string().required(),
-    link: Joi.required().string().custom(validateURL),
-    Image: Joi.required().string().custom(validateURL),
-    owner: Joi.string().required(),
+    link: Joi.string().required().custom(validateURL),
+    image: Joi.string().required().custom(validateURL),
   }),
 });
 
@@ -50,5 +49,5 @@ module.exports = {
   signUpValidation,
   signInValidation,
   newArticleValidation,
-  articleIdValidation
+  articleIdValidation,
 };

@@ -10,6 +10,6 @@ const { newArticleValidation, articleIdValidation } = require('../midlleware/val
 
 router.get('/', returnSavedArticles);
 router.post('/', newArticleValidation, createNewArticle);
-router.delete('/:article._id', articleIdValidation, deleteArticle);
+router.delete('/:article_id', articleIdValidation, deleteArticle);
 
 module.exports = router;
