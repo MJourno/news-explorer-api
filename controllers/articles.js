@@ -65,4 +65,4 @@ module.exports = {
   returnSavedArticles,
   createNewArticle,
   deleteArticle,
-}
+};
