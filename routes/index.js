@@ -15,4 +15,4 @@ router.use('/articles', articlesRouter);
 router.use(() => {
   throw new ErrorHandler(404, 'The requested resource was not found.');
 });
-module.exports = router
+module.exports = router;
