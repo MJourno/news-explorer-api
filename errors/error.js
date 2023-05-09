@@ -30,4 +30,4 @@ const customErrorHandler = (err, res) => {
 module.exports = {
   ErrorHandler,
   customErrorHandler,
-};
+}
