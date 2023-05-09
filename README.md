@@ -19,4 +19,4 @@ For this project I've used:
 * eslint
 * celebrate
 
-Developer: Maayan-Journo
+Developer: Maayan Journo
