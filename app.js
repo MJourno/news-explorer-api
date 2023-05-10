@@ -8,7 +8,7 @@ const { errors } = require('celebrate');
 const router = require('./routes');
 const { customErrorHandler } = require('./errors/error');
 const { requestLogger, errorLogger } = require('./midlleware/logger');
-
+const { limiter } = require('./utils/limiter');
 console.log(process.env.NODE_ENV); // production
 
 const app = express();
@@ -20,8 +20,8 @@ const allowedOrigins = [
   'https://api.articlear.crabdance.com',
   'http://localhost:3000',
 ];
-
-mongoose.connect('mongodb://localhost:27017/final-project-db')
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGO_DB)
   .then(() => {
     console.log('connected to mongoose');
   }).catch((error) => {
@@ -29,6 +29,7 @@ mongoose.connect('mongodb://localhost:27017/final-project-db')
   });
 
 app.use(helmet());
+app.use(limiter);
 app.use(bodyParser.json());
 app.use(cors());
 app.options(allowedOrigins, cors());
