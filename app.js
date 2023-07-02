@@ -15,9 +15,9 @@ const app = express();
 const { PORT = 3000 } = process.env;
 
 const allowedOrigins = [
-  'https://articlear.strangled.net',
-  'https://www.articlear.strangled.net',
-  'https://api.articlear.strangled.net',
+  'https://news4u.strangled.net',
+  'https://www.news4u.strangled.net',
+  'https://api.news4u.strangled.net',
   'http://localhost:3000',
 ];
 mongoose.set("strictQuery", false);
