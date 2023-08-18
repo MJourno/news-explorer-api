@@ -6,17 +6,22 @@ require('dotenv').config();
 const { NODE_ENV } = require('../utils/constants');
 
 module.exports = (req, res, next) => {
+  console.log(req.headers,'req');
   // getting authorization from the header
   const { authorization } = req.headers;
-  console.log(req.headers, 'req.headers');
-  // check the header exists and starts with 'Bearer '
+  console.log('Original Authorization:', authorization);  // check the header exists and starts with 'Bearer '
+
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    console.log(authorization, 'authorization2');
+    console.log('Authorization header missing or incorrect format');
     return next(new ErrorHandler(401, 'Authorization Error'));
   }
   // getting the token
-  const token = authorization.replace('Bearer ', '');
+  const token = authorization.replace('Bearer ', '').trim();
+  console.log('Extracted Token:', token);
+
   let payload;
+  console.log('Token Payload:', payload);
+
   try {
     // verifying the token
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');

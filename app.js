@@ -27,6 +27,8 @@ mongoose.connect(process.env.MONGO_DB)
   }).catch((error) => {
     console.log('cant connect', error);
   });
+app.options('*', cors()); // Handle preflight requests for all routes
+
 
 app.use(helmet());
 app.use(limiter);
