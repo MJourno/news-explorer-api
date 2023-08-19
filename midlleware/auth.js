@@ -20,12 +20,15 @@ module.exports = (req, res, next) => {
   console.log('Extracted Token:', token);
 
   let payload;
-  console.log('Token Payload:', payload);
 
   try {
     // verifying the token
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    console.log('Token Payload:', payload);
+
     if (payload) {
+      const expirationDate = new Date(payload.exp * 1000); // Convert UNIX timestamp to milliseconds
+      console.log('Token Expiration Date:', expirationDate.toISOString());
       req.user = payload;
     } else {
       return next(new ErrorHandler(401, 'Authorization Error'));
